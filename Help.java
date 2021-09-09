@@ -1,38 +1,39 @@
 class Help {
   public static void table(Integer k, String[] args) {
-    int maxlen = 0;
-    String[] args2 = new String[k];
-    String str = "- - - - - - - - -  ";
-    for (int i = 0; i < k; i++) {
-      if (args[i].length() > maxlen) {
-        maxlen = args[i].length();
+
+    int width_and_height = k;
+    String str2 = "+-----------";
+    System.out.println(str2.repeat(k + 1));
+    System.out.format("|Comp/User  | %10s", args[0]);
+    for (int i = 1; i < width_and_height; i++) {
+      System.out.format("| %10s", args[i]);
+      if (i == width_and_height - 1) { // closing | for last column
+        System.out.print("|");
       }
     }
-    for (int i = 0; i < k; i++) {
-      args2[i] = args[i];
-      if (args[i].length() < maxlen) {
-        args2[i] += String.format("%" + (maxlen - args[i].length()) + "s", " ");
-      }
-    }
-    for (int i = 0; i < k; i++) {
-      System.out.format("%10s%7s%1s", "|", args[i], "|");
-    }
-    System.out.println("\n" + str.repeat(k));
-    for (int i = 0; i < k; i++) {
-      System.out.print("|" + args2[i]);
-      for (int j = 0; j < k; j++) {
+    System.out.println();
+    for (int i = 0; i < width_and_height; i++) {
+      System.out.println(str2.repeat(k + 1));
+      System.out.format("| %10s", args[i]);
+      for (int j = 0; j < width_and_height; j++) {
         int w = Winner.calculate(i, j, k);
         if (w == 0) {
-          System.out.format("%9s%" + maxlen + "s", "|  DRAW  |", " ");
+          System.out.format("| %10s", "DRAW");
         }
         if (w == 1) {
-          System.out.format("%9s%" + maxlen + "s", "|  WIN   |", " ");
+          System.out.format("| %10s", " WIN");
         }
         if (w == -1) {
-          System.out.format("%9s%" + maxlen + "s", "|  LOSE  |", " ");
+          System.out.format("| %10s", "LOSE");
+        }
+        if (j == width_and_height - 1) { // closing | for last column
+          System.out.print("|");
         }
       }
-      System.out.println("\n" + str.repeat(k));
+      System.out.println();
+      if (i == width_and_height - 1) { // closing line for last row
+        System.out.println(str2.repeat(k + 1));
+      }
     }
   }
 }
