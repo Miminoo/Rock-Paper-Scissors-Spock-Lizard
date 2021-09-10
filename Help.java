@@ -2,8 +2,8 @@ import io.bretty.console.table.*;
 
 class Help {
   public static void table(Integer k, String[] args) {
-	  String[] names = new String[k];
-	  names=args;
+	  String[] name = new String[k];
+	  name=args;
 	  String value="";
 	  String[] ages;
 	  ColumnFormatter<String> nameFormatter = ColumnFormatter.text(Alignment.LEFT, 15);
