@@ -1,39 +1,25 @@
+import io.bretty.console.table.*;
+
 class Help {
   public static void table(Integer k, String[] args) {
-
-    int width_and_height = k;
-    String str2 = "+-----------";
-    System.out.println(str2.repeat(k + 1));
-    System.out.format("|Comp/User  | %10s", args[0]);
-    for (int i = 1; i < width_and_height; i++) {
-      System.out.format("| %10s", args[i]);
-      if (i == width_and_height - 1) { // closing | for last column
-        System.out.print("|");
-      }
-    }
-    System.out.println();
-    for (int i = 0; i < width_and_height; i++) {
-      System.out.println(str2.repeat(k + 1));
-      System.out.format("| %10s", args[i]);
-      for (int j = 0; j < width_and_height; j++) {
-        int w = Winner.calculate(i, j, k);
-        if (w == 0) {
-          System.out.format("| %10s", "DRAW");
-        }
-        if (w == 1) {
-          System.out.format("| %10s", " WIN");
-        }
-        if (w == -1) {
-          System.out.format("| %10s", "LOSE");
-        }
-        if (j == width_and_height - 1) { // closing | for last column
-          System.out.print("|");
-        }
-      }
-      System.out.println();
-      if (i == width_and_height - 1) { // closing line for last row
-        System.out.println(str2.repeat(k + 1));
-      }
-    }
-  }
-}
+	  String[] names = new String[k];
+	  names=args;
+	  String value="";
+	  String[] ages;
+	  ColumnFormatter<String> nameFormatter = ColumnFormatter.text(Alignment.LEFT, 15);
+	  ColumnFormatter<String> valueFormatter = ColumnFormatter.text(Alignment.CENTER, 15);
+	  Table.Builder builder = new Table.Builder("User/Comp", names, nameFormatter);
+	  for (int i=0; i<k;i++) {
+		  ages = new String[k];
+		  for (int j=0;j<k;j++) {
+		  int q = Winner.calculate(i, j, k);
+		  if (q == 1) {value="WIN ";}
+		  if (q == 0) {value="DRAW";}
+		  if (q ==-1) {value="LOSE";}
+		  ages[j] = value;
+		  }
+		  builder.addColumn(args[i], ages, valueFormatter);
+	  }
+	  Table table = builder.build();
+	  System.out.println(table); 
+}}
