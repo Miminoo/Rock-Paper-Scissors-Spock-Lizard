@@ -8,7 +8,7 @@ class Help {
 	  String[] ages;
 	  ColumnFormatter<String> nameFormatter = ColumnFormatter.text(Alignment.LEFT, 15);
 	  ColumnFormatter<String> valueFormatter = ColumnFormatter.text(Alignment.CENTER, 15);
-	  Table.Builder builder = new Table.Builder("User/Comp", names, nameFormatter);
+	  Table.Builder builder = new Table.Builder("User/Comp", name, nameFormatter);
 	  for (int i=0; i<k;i++) {
 		  ages = new String[k];
 		  for (int j=0;j<k;j++) {
